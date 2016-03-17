@@ -202,10 +202,12 @@ public class CubeDockerConfigurator {
         }
 
         config.put(CubeDockerConfiguration.DOCKER_URI, dockerServerUri);
-        if (!config.containsKey(CubeDockerConfiguration.CERT_PATH)) {
+        URI serverUri = URI.create(dockerServerUri);
+        // If certpath is not set and we are not in a native unix socket we need to set a cert path
+        if (!config.containsKey(CubeDockerConfiguration.CERT_PATH) && !UNIX_SOCKET_SCHEME.equalsIgnoreCase(serverUri.getScheme())) {
             config.put(CubeDockerConfiguration.CERT_PATH, HomeResolverUtil.resolveHomeDirectoryChar(getDefaultTlsDirectory(config)));
         }
-    resolveDockerServerIp(config, dockerServerUri);
+    resolveDockerServerIp(config, serverUri);
 
     return config;
 }
@@ -214,8 +216,7 @@ public class CubeDockerConfigurator {
         return dockerServerUri.contains(AbstractCliInternetAddressResolver.DOCKERHOST_TAG);
     }
 
-    private void resolveDockerServerIp(Map<String, String> config, String dockerServerUri) {
-        URI serverUri = URI.create(dockerServerUri);
+    private void resolveDockerServerIp(Map<String, String> config, URI serverUri) {
         String serverIp = UNIX_SOCKET_SCHEME.equalsIgnoreCase(serverUri.getScheme()) ? "localhost" : serverUri.getHost();
         config.put(CubeDockerConfiguration.DOCKER_SERVER_IP, serverIp);
     }
