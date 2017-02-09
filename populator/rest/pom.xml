@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <!-- Parent -->
+    <parent>
+        <groupId>org.arquillian.cube</groupId>
+        <artifactId>arquillian-cube-populator-parent</artifactId>
+        <version>1.0.0.Final-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <!-- Model Version -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+    </properties>
+
+    <!-- Artifact Configuration -->
+    <artifactId>arquillian-cube-populator-rest-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Arquillian Cube Populator REST Parent</name>
+
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.arquillian.cube</groupId>
+            <artifactId>arquillian-cube-populator-nosql-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <modules>
+        <module>api</module>
+        <module>postman</module>
+    </modules>
+
+</project>

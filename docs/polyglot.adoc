@@ -92,7 +92,7 @@ Finally the +arquillian.xml+ configuration file.
 ----
 <1> This property is used to set which container must be started. In this case +node+.
 
-IMPORTANT: If containerless definition only contains only one image, it is not necessary to use _containerlessDocker_ property. At the same time if the image only exposes one port, it is not necessary to use _embeddedPort_ proeprty to set the port. So in previous example you could avoid using _containerlessDocker_ and _embeddedPort_.
+IMPORTANT: If containerless definition only contains only one image, it is not necessary to use _containerlessDocker_ property. At the same time if the image only exposes one bindPort, it is not necessary to use _embeddedPort_ proeprty to set the bindPort. So in previous example you could avoid using _containerlessDocker_ and _embeddedPort_.
 
 And finally the *Arquillian* test.
 

@@ -7,7 +7,7 @@ And also points that: Within your web app’s UI there are areas that your tests
 As you can see, Page Object applies to UI elements. We (the Arquillian community) has coined a new pattern following Page Object pattern called *Container Object* pattern. You can think about Container Object as areas of a container (for now Docker container) that your test might interact with. For example some of these areas could be:
 
 * to get the host IP where container is running
-* the bounded port for a given exposed port
+* the bounded bindPort for a given exposed bindPort
 * any parameter configured inside the configuration file (Dockerfile) like a user or password to access to the service which the container exposes.
 
 In case of running a MySQL database in the container, it could be the user and password to access to database. Notice that nothing prevents you to generate the correct URL for accessing to the service from the test, or execute commands against container like retrieving an internal file.
@@ -24,7 +24,7 @@ So all these operations that involves the FTP server and container could be join
 This container object might contain information of:
 
 * which image is used
-* IP and bounded port of host where this FTP server is running
+* IP and bounded bindPort of host where this FTP server is running
 * user and password to access to the FTP server
 * methods for asserting the existence of a file
 
@@ -52,11 +52,11 @@ public class PingPongContainer {
   String dockerHost;
 
   @HostPort(8080)
-  private int port;
+  private int bindPort;
 
   public URL getConnectionUrl() { // <3>
     try {
-      return new URL(“http://” + dockerHost + “:” + port);
+      return new URL(“http://” + dockerHost + “:” + bindPort);
 	  } catch (MalformedURLException e) {
 		  throw new IllegalArgumentException(e);
 	  }
@@ -68,8 +68,8 @@ public class PingPongContainer {
 <3> Container Object hides how to connect to PingPong server.
 
 `@Cube` annotation is used to configure this Container Object.
-Initially you set that the started container will be named `pingpong` and the port binding information for the container instance, in this case `5000->8080/tcp`.
-Notice that this can be an array to set more than one port binding definition.
+Initially you set that the started container will be named `pingpong` and the bindPort binding information for the container instance, in this case `5000->8080/tcp`.
+Notice that this can be an array to set more than one bindPort binding definition.
 
 Next annotation is `@CubeDockerFile` which configure how Container is created.
 In this case using a Dockerfile located at default class path location.
@@ -80,8 +80,8 @@ IMPORTANT: `CubeDockerFile` annotation sets the location where the `Dockerfile` 
 
 Any Cube can be enriched with any client side enricher, in this case with `@HostIp` enricher, but it could be enriched with `DockerClient` using `@ArquillianResource` as well.
 
-Finally the `@HostPort` is used to translate the exposed port to bound port.
-So in this example port value will be 5000. You are going to lean briefly why this annotation is important.
+Finally the `@HostPort` is used to translate the exposed bindPort to bound bindPort.
+So in this example bindPort value will be 5000. You are going to lean briefly why this annotation is important.
 
 And then you can start using this container object in your test:
 
@@ -107,7 +107,7 @@ The most important thing here is that you need to set Container Object as a fiel
 It is very important to annotate the field with `Cube`, so before Arquillian runs the test, it can detect that it needs to  start a new Cube (Docker container), create the Container Object and inject it in the test.
 Notice that this annotation is exactly the same as used when you defined the Container Object.
 And it is in this way because you can override any property of the Container Object from the test side.
-This is why `@HostPort` annotation is important, since port can be changed from the test definition, you need to find a way to inject the correct port inside the container object.
+This is why `@HostPort` annotation is important, since bindPort can be changed from the test definition, you need to find a way to inject the correct bindPort inside the container object.
 
 IMPORTANT: Container Object pattern only works in Client mode or Arquillian standalone.
 

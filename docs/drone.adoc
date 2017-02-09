@@ -46,7 +46,7 @@ videoOutput:: Directory where videos are stored. By default is `target/reports/v
 browserImage:: Docker image to be used as custom browser image instead of the official one (https://github.com/SeleniumHQ/docker-selenium). Notice that browser property will be used for setting `WebDriver` capabilities.
 browserDockerfileLocation:: Dockerfile location to be used to built custom docker image instead of the official one. This property has preference over browserImage.
 
-IMPORTANT: Your custom images must expose the webdriver port `4444` and if you plan to use VNC, expose the default port `5900` as well
+IMPORTANT: Your custom images must expose the webdriver bindPort `4444` and if you plan to use VNC, expose the default bindPort `5900` as well
 
 
 An example of configuration might look like:
@@ -184,13 +184,13 @@ Some examples (for now don't think about ports since it is going to touch later)
 * If `url` is _http://dockerHost/context_  then the result will be `http://ipOfDockerHost/context`.
 * if `url` is _http://containerName/context_ which means it is not an IP nor `dockerHost`, then Cube will find the internal IP of container with given name.
 
-Previous examples has not take into consideration port thing.
-The next thing to resolve is the port of the URL which in this case and since browser runs inside docker host means resolve exposed ports..
+Previous examples has not take into consideration bindPort thing.
+The next thing to resolve is the bindPort of the URL which in this case and since browser runs inside docker host means resolve exposed ports..
 
 Port resolution follows next rules:
 
-* If `url` contains a port, that port is used. Notice that this port should be an exposed port.
-* If `url` has no port then _80_ is used.
+* If `url` contains a bindPort, that bindPort is used. Notice that this bindPort should be an exposed bindPort.
+* If `url` has no bindPort then _80_ is used.
 
 In most cases you are going to use:
 

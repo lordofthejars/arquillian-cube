@@ -19,7 +19,7 @@ Let's see previous example but instead of creating a container from a predefined
       dockerfileName: my-dockerfile # <5>
     await:
       strategy: polling
-    env: [JAVA_OPTS=-Dcom.sun.management.jmxremote.port=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false]
+    env: [JAVA_OPTS=-Dcom.sun.management.jmxremote.bindPort=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false]
     portBindings: [8089/tcp, 8080/tcp]
 </property>
 ----
@@ -38,7 +38,7 @@ An example of +Dockerfile+ is:
 ----
 FROM tutum/tomcat:7.0
 
-ENV JAVA_OPTS -Dcom.sun.management.jmxremote.port=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false
+ENV JAVA_OPTS -Dcom.sun.management.jmxremote.bindPort=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false
 ADD tomcat-users.xml /tomcat/conf/ # <1>
 EXPOSE 8089
 CMD ["/tomcat/bin/catalina.sh","run"]

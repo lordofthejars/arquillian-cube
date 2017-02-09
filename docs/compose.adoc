@@ -19,7 +19,7 @@ First let's create a file called `envs` on root of the project which configures 
 .envs
 ----
 TOMCAT_PASS=mypass
-JAVA_OPTS=-Djava.rmi.server.hostname=dockerServerIp -Dcom.sun.management.jmxremote.rmi.port=8088 -Dcom.sun.management.jmxremote.port=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false
+JAVA_OPTS=-Djava.rmi.server.hostname=dockerServerIp -Dcom.sun.management.jmxremote.rmi.bindPort=8088 -Dcom.sun.management.jmxremote.bindPort=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false
 ----
 
 IMPORTANT: You can use `dockerServerIp` as special tag for identify the docker host IP. Before injecting the environement variables, Cube will change it to real host IP.

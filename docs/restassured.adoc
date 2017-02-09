@@ -6,10 +6,10 @@ An example of how to make a GET request and validate the JSON or XML response mi
 `get("/lotto").then().assertThat().body("lotto.lottoId", equalTo(5));`
 
 
-The problem with Rest Assured is that by default it assumes that host is _localhost_ and port _8080_.
+The problem with Rest Assured is that by default it assumes that host is _localhost_ and bindPort _8080_.
 This might be perfect when not using Docker but when using docker this assumptions might not be the most typical.
 
-For example you may use another bind port rather than _8080_, you can expose 8080 port but bind to another port.
+For example you may use another bind bindPort rather than _8080_, you can expose 8080 bindPort but bind to another bindPort.
 Also you might run docker host in different ip rather than _localhost_, maybe because you are using docker machine or maybe because you are using an external docker host.
 
 So in these cases you need to set in every request:
@@ -20,7 +20,7 @@ or you can also configure Rest-Assured:
 
 ----
 RestAssured.baseURI = "http://myhost.org";
-RestAssured.port = 5000;
+RestAssured.bindPort = 5000;
 ----
 
 or using RequestSpecBuilder
@@ -76,13 +76,13 @@ By default, if your scenario is not complex you don't need to configure anything
 |http
 |Schema used in case of auto-resolution of baseUri
 
-|port
-|If from all running containers there is only one binding port (notice that exposed ports are not bound if not specified), then this is the value used. If there are more than one binding port then an exception is thrown.
-|Port to be used for communicating with docker host. By default this port must be the exposed port used in port binding. The extension will resolve for given exposed port which is the binding port. If it is not found then exposed port will be assumed as binding port too. For example using -p 8080:80 you need to set this property to 80 and extension will resolve to 8080.
+|bindPort
+|If from all running containers there is only one binding bindPort (notice that exposed ports are not bound if not specified), then this is the value used. If there are more than one binding bindPort then an exception is thrown.
+|Port to be used for communicating with docker host. By default this bindPort must be the exposed bindPort used in bindPort binding. The extension will resolve for given exposed bindPort which is the binding bindPort. If it is not found then exposed bindPort will be assumed as binding bindPort too. For example using -p 8080:80 you need to set this property to 80 and extension will resolve to 8080.
 
 |exclusionContainers
 |
-|If you want to use auto-resolution of the port attribute you might want to exclude that extension searches for binding ports in some containers (for example monitoring containers). This is a CSV property to set container names of al of them.
+|If you want to use auto-resolution of the bindPort attribute you might want to exclude that extension searches for binding ports in some containers (for example monitoring containers). This is a CSV property to set container names of al of them.
 
 |basePath
 |
@@ -110,7 +110,7 @@ For example:
 .arquillian.xml
 ----
 <extension qualifier="restassured">
-    <property name="port">80</property>
+    <property name="bindPort">80</property>
 </extension>
 ----
 

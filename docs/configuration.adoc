@@ -127,7 +127,7 @@ tomcat: # <1>
   extraHosts: a
   attachStdin: true
   attachStderr: true
-  env: [TOMCAT_PASS=mypass, JAVA_OPTS=-Dcom.sun.management.jmxremote.port=8089] # <6>
+  env: [TOMCAT_PASS=mypass, JAVA_OPTS=-Dcom.sun.management.jmxremote.bindPort=8089] # <6>
   cmd: [] # <7>
   dns: [127.0.0.1]
   volumes: [/tmp]
@@ -164,7 +164,7 @@ tomcat: # <1>
 <5> In +strategy+ you set which strategy you want to follow. Currently three strategies are supported. _static_, _native_ and _polling_.
 <6> You can pass environment variables by using `env`. In this section you can set special `dockerServerIp` string which at runtime will be replaced by _Cube_ to current docker server ip.
 <7> After the container is up, a list of commands can be executed within it.
-<8> Port forwarding is configured using `portBinding` section. It contains a list of `exposedPort` and `port` separated by arrow (_->_). If only one port is provided, *Arquillian Cube* will expose the same port number. In this example the exposed port 8089 is mapped to 8089 and exposed port 8080 is mapped to 8081.
+<8> Port forwarding is configured using `portBinding` section. It contains a list of `exposedPort` and `bindPort` separated by arrow (_->_). If only one bindPort is provided, *Arquillian Cube* will expose the same bindPort number. In this example the exposed bindPort 8089 is mapped to 8089 and exposed bindPort 8080 is mapped to 8081.
 <9> You can extend another configuration. Any top level element and it's children from the target container-id will be copied over to this configuration, unless they have been defined here already.
 <10> You can use `manual` to indicate that this container is going to be started or in the test manually using `CubeController` or started by an extension. This attribute is ingorned in case of arquillian containers (none autostart containers) or in case of a linked container that comes from a none manual container.
 <11> Kills the container instead of stopping it normally. By default is false so containers are stopped.
@@ -181,7 +181,7 @@ tomcat:
   exposedPorts: [8089/tcp]
   await:
     strategy: polling
-  env: [TOMCAT_PASS=mypass, JAVA_OPTS=-Dcom.sun.management.jmxremote.port=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false]
+  env: [TOMCAT_PASS=mypass, JAVA_OPTS=-Dcom.sun.management.jmxremote.bindPort=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false]
   portBindings: [8089/tcp, 8080/tcp]
 ----
 
@@ -245,7 +245,7 @@ You can also use `wait-for-it` script which is automatically downloaded, copied 
 By default if you use _ss_ strategy but ss command is not installed into the container it fallsback automatically to waitforit strategy.
 static:: similar to _polling_ but it uses the host ip and specified list of ports provided as configuration parameter. This can be used in case of using _Boot2Docker_.
 sleeping:: sleeps current thread for the specified amount of time. You can specify the time in seconds or milliseconds.
-log:: it looking for a specified pattern in container log to detect service startup. This can be used when there is no port to connect or connecting to the port successfully doesn't mean the service is fully initialized.
+log:: it looking for a specified pattern in container log to detect service startup. This can be used when there is no bindPort to connect or connecting to the bindPort successfully doesn't mean the service is fully initialized.
 http:: polls through a configured http endpoint checking for http response code and optionally the answer content or headers.
 <fullyqualifiedclassname>:: if you specify a fully qualified class name, Arquillian Cube will instantiate the given class. In this way you can implement your own await strategies. There are two rules to follow, the first one is that class must implement `AwaitStrategy` and the second one is that one default constructor must be provided. Optionally you can add fields/setters for types `Cube`, `DockerClientExecutor` or `Await` to inject them into the await strategy.
 
@@ -386,12 +386,12 @@ tomcat:
 
 When you are using _Docker_ you can set two different parameters, +exposedPort+ and +portBinding+.
 +exposedPorts+ are ports that are available inside _Docker_ infrastructure and they are used for communication between _Docker_ containers but not from outside.
-On the other side +portBindings+ are a way to instruct _Docker_ container to publish a port to be available from outside (for example from our test).
+On the other side +portBindings+ are a way to instruct _Docker_ container to publish a bindPort to be available from outside (for example from our test).
 
-It seems reasonable that if you set a port binding this port should automatically be exposed port as well.
-For this reason in *Arquillian Cube* you can use +portBinding+ and it will automatically set to exposed port.
+It seems reasonable that if you set a bindPort binding this bindPort should automatically be exposed bindPort as well.
+For this reason in *Arquillian Cube* you can use +portBinding+ and it will automatically set to exposed bindPort.
 
-In next example we are only setting +portBinding+ and *Arquillian Cube* will instruct _Docker_ to expose port 8080 and of course bind the port 8080 so it can be accessible from outside.
+In next example we are only setting +portBinding+ and *Arquillian Cube* will instruct _Docker_ to expose bindPort 8080 and of course bind the bindPort 8080 so it can be accessible from outside.
 
 [source, xml]
 .arquillian.xml

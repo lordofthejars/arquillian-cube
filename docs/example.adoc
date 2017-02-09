@@ -98,7 +98,7 @@ And finally we need to configure _Tomcat_ remote adapter and *Arquillian Cube* i
             exposedPorts: [8089/tcp]
             await:
               strategy: polling
-            env: [TOMCAT_PASS=mypass, JAVA_OPTS=-Dcom.sun.management.jmxremote.port=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false]
+            env: [TOMCAT_PASS=mypass, JAVA_OPTS=-Dcom.sun.management.jmxremote.bindPort=8089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false]
             portBindings: [8089/tcp, 8080/tcp]
       </property>
   </extension>
@@ -119,7 +119,7 @@ And finally we need to configure _Tomcat_ remote adapter and *Arquillian Cube* i
 <3> _Docker_ server URI is required. In case you are using a remote _Docker_ host or _Boot2Docker_ here you need to set the remote host ip, but in this case _Docker_ server is on same machine.
 <4> A _Docker_ container contains a lot of parameters that can be configured. To avoid having to create one XML property for each one, a YAML content can be embedded directly as property.
 <5> Configuration of _Tomcat_ remote adapter. Cube will start the _Docker_ container when it is ran in the same context as an _Arquillian_ container with the same name.
-<6> Host can be _localhost_ because there is a port forwarding between container and _Docker_ server.
+<6> Host can be _localhost_ because there is a bindPort forwarding between container and _Docker_ server.
 <7> Port is exposed as well.
 <8> User and password are required to deploy the war file to remote _Tomcat_.
 
@@ -128,7 +128,7 @@ Read more at <<Configuration>> section and <<Docker-Compose Format>>.
 
 And that's all.
 Now you can run your test and you will see how _tutum/tomcat:7.0_ image is downloaded and started.
-Ports 8080 (Tomcat standard port) and 8089(JMX port used by Arquillian) are exposed.
+Ports 8080 (Tomcat standard bindPort) and 8089(JMX bindPort used by Arquillian) are exposed.
 Finally in _env_ section, environment variables are set. Read next link to understand why this is required https://docs.jboss.org/author/display/ARQ/Tomcat+7.0+-+Remote
 
 == Standalone Example
