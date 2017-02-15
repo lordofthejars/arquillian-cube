@@ -28,15 +28,12 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-populator-nosql-api</artifactId>
-        </dependency>
     </dependencies>
 
     <modules>
         <module>api</module>
         <module>postman</module>
+        <module>ftest-postman</module>
     </modules>
 
 </project>

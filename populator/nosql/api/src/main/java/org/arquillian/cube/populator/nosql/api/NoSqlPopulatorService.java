@@ -4,6 +4,11 @@ import org.arquillian.cube.populator.spi.PopulatorService;
 
 import java.util.List;
 
+/**
+ * Extends the populator service for NoSql services. Each NoSql database should implement this interface, for example one for MongoDb, another one for Redis, ...
+ * You can think about this interface as wrapper to real connection against service.
+ * @param <T>
+ */
 public interface NoSqlPopulatorService<T> extends PopulatorService<T> {
     /**
      * Methods called to connect to the backend.

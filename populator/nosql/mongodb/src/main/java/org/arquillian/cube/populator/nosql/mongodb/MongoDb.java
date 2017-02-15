@@ -7,6 +7,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation to set Populator of MongoDb.
+ */
 @Populator
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

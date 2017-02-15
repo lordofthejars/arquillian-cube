@@ -7,9 +7,9 @@ import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
 
 public class MongoDbPopulatorExtension implements LoadableExtension {
 
-   @Override
-   public void register(ExtensionBuilder extensionBuilder) {
-      extensionBuilder.service(PopulatorService.class, MongoDbPopulatorService.class)
-                       .service(ResourceProvider.class, NoSqlPopulatorEnricher.class);
-   }
+    @Override
+    public void register(ExtensionBuilder extensionBuilder) {
+        extensionBuilder.service(PopulatorService.class, MongoDbPopulatorService.class)
+                .service(ResourceProvider.class, NoSqlPopulatorEnricher.class);
+    }
 }

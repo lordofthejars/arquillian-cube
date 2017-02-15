@@ -1,7 +1,11 @@
 package org.arquillian.cube.populator.rest.api;
 
-/**
- * Created by alex on 09/02/2017.
- */
-public class RestPopulatorEnricher {
+import org.arquillian.cube.populator.core.Populator;
+import org.arquillian.cube.populator.core.PopulatorEnricher;
+
+public class RestPopulatorEnricher extends PopulatorEnricher<RestPopulatorService> {
+    @Override
+    public Populator createPopulator(RestPopulatorService populatorService) {
+        return new RestPopulator(populatorService);
+    }
 }

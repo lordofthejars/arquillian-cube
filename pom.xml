@@ -80,6 +80,9 @@
         <version.arquillian.recorder>1.1.5.Final</version.arquillian.recorder>
         <version.restassured>3.0.0</version.restassured>
         <version.jgit>4.5.0.201609210915-r</version.jgit>
+        <version.gson>2.8.0</version.gson>
+        <version.okhttp>3.6.0</version.okhttp>
+        <version.wiremock>2.5.1</version.wiremock>
     </properties>
 
     <dependencyManagement>
@@ -177,6 +180,11 @@
             </dependency>
             <dependency>
                 <groupId>org.arquillian.cube</groupId>
+                <artifactId>arquillian-cube-populator-rest-postman</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.arquillian.cube</groupId>
                 <artifactId>arquillian-cube-populator-nosql-mongodb</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -184,6 +192,11 @@
                 <groupId>org.arquillian.cube</groupId>
                 <artifactId>arquillian-cube-populator-nosql-redis</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.tomakehurst</groupId>
+                <artifactId>wiremock</artifactId>
+                <version>${version.wiremock}</version>
             </dependency>
 
             <dependency>
@@ -241,6 +254,16 @@
                 <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>${version.restassured}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${version.gson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${version.okhttp}</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
