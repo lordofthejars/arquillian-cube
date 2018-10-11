@@ -30,6 +30,7 @@
     <module>docker</module>
     <module>openshift</module>
     <module>kubernetes</module>
+    <module>serverless</module>
     <module>requirement</module>
     <module>bom</module>
     <module>requirement-spi</module>
