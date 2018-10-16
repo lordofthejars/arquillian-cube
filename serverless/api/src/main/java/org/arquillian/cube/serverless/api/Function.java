@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * Annotation to define the function
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE,})
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 public @interface Function {
 
     /**

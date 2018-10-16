@@ -15,6 +15,7 @@
   <modules>
     <module>openwhisk</module>
     <module>api</module>
+    <module>core</module>
   </modules>
 
 </project>

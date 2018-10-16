@@ -14,7 +14,7 @@
   <dependencies>
     <dependency>
       <groupId>org.arquillian.cube</groupId>
-      <artifactId>arquillian-cube-serverless-api</artifactId>
+      <artifactId>arquillian-cube-serverless-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
